@@ -1,3 +1,4 @@
+import 'package:du_an_1/controller/sign_up_controller.dart';
 import 'package:du_an_1/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
