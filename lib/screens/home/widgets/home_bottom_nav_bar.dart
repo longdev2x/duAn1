@@ -1,11 +1,12 @@
 import 'package:du_an_1/controller/home_controller.dart';
+import 'package:du_an_1/screens/profile/profile_screen.dart';
 import 'package:du_an_1/utils/images.dart';
 import 'package:du_an_1/view/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 List<Widget> screens = [
-  const Center(child: Text('Tracking'),),
+   Center(child: ElevatedButton(onPressed: () => const ProfileScreen(), child: const Text('Navigate To Profile')),),
   const Center(child: Text('Users'),),
   const Center(child: Text('PostScreen'),),
   const Center(child: Text('NotifyScreen'),),
