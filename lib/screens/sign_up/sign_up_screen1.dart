@@ -1,13 +1,13 @@
+import 'package:du_an_1/screens/sign_up/sign_up_screen2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:timesheet/controller/sign_up_controller.dart';
-import 'package:timesheet/screen/sign_up/sign_up_screen2.dart';
-import 'package:timesheet/view/app_button.dart';
-import 'package:timesheet/view/app_text.dart';
-import 'package:timesheet/view/app_text_field.dart';
-import 'package:timesheet/view/app_toast.dart';
+import 'package:du_an_1/controller/sign_up_controller.dart';
+import 'package:du_an_1/view/app_button.dart';
+import 'package:du_an_1/view/app_text.dart';
+import 'package:du_an_1/view/app_text_field.dart';
+import 'package:du_an_1/view/app_toast.dart';
 
 class SignUpScreen1 extends StatefulWidget {
   const SignUpScreen1({super.key});
