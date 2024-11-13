@@ -1,0 +1,13 @@
+import 'package:du_an_1/utils/app_constants.dart';
+import '../api/api_client.dart';
+import 'package:get/get.dart';
+
+class SplashRepo extends GetxService{
+  final ApiClient apiClient;
+
+  SplashRepo({required this.apiClient});
+
+  Future<Response> getConfig() {
+    return apiClient.getData(AppConstants.CONFIG_URI);
+  }
+}

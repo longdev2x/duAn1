@@ -41,15 +41,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-
-
-# Ignore all controller files
-lib/controller/*
-
-# Ignore all model files
-lib/data/model/body/request/*
-lib/data/model/response/*
-
-# Ignore all repository files
-lib/data/repository/*
