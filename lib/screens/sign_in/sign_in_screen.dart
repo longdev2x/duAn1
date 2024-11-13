@@ -1,8 +1,9 @@
+import 'package:du_an_1/screens/sign_up/sign_up_screen1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:du_an_1/controller/auth_controller.dart';
-import 'package:du_an_1/screen/sign_up/sign_up_screen1.dart';
+
 import 'package:du_an_1/utils/images.dart';
 import 'package:du_an_1/view/app_button.dart';
 import 'package:du_an_1/view/app_image.dart';
