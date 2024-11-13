@@ -1,20 +1,34 @@
 import 'dart:convert';
 import 'package:camera/camera.dart';
 import 'package:du_an_1/controller/auth_controller.dart';
-import 'package:du_an_1/controller/localization_controller.dart';
-import 'package:du_an_1/controller/splash_controller.dart';
-import 'package:du_an_1/data/api/api_client.dart';
+import 'package:du_an_1/controller/check_in_controller.dart';
+import 'package:du_an_1/controller/home_controller.dart';
+import 'package:du_an_1/controller/notification_controller.dart';
+import 'package:du_an_1/controller/post_controller.dart';
+import 'package:du_an_1/controller/profile_controller.dart';
+import 'package:du_an_1/controller/sign_up_controller.dart';
+import 'package:du_an_1/controller/tracking_controller.dart';
+import 'package:du_an_1/controller/user_controller.dart';
 import 'package:du_an_1/data/model/response/language_model.dart';
-import 'package:du_an_1/data/repository/auth_repo.dart';
-import 'package:du_an_1/data/repository/language_repo.dart';
+import 'package:du_an_1/data/repository/check_in_repo.dart';
+import 'package:du_an_1/data/repository/notification_repo.dart';
+import 'package:du_an_1/data/repository/post_repo.dart';
+import 'package:du_an_1/data/repository/profile_repo.dart';
 import 'package:du_an_1/data/repository/splash_repo.dart';
+import 'package:du_an_1/data/repository/tracking_repo.dart';
+import 'package:du_an_1/data/repository/user_search_repo.dart';
 import 'package:du_an_1/helper/notification_helper.dart';
-import 'package:du_an_1/theme/theme_controller.dart';
-import 'package:du_an_1/utils/app_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../controller/localization_controller.dart';
+import '../controller/splash_controller.dart';
+import '../data/api/api_client.dart';
+import '../data/repository/auth_repo.dart';
+import '../data/repository/language_repo.dart';
+import '../theme/theme_controller.dart';
+import '../utils/app_constants.dart';
 
 Future<Map<String, Map<String, String>>> init() async {
   // Core
@@ -28,15 +42,28 @@ Future<Map<String, Map<String, String>>> init() async {
 
   // Repository
   Get.lazyPut(() => LanguageRepo());
-  Get.lazyPut(() => SplashRepo(apiClient: Get.find()));
   Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => SplashRepo(apiClient: Get.find()));
+  Get.lazyPut(() => CheckInRepo(apiClient: Get.find()));
+  Get.lazyPut(() => TrackingRepo(apiClient: Get.find()));
+  Get.lazyPut(() => UserSearchRepo(apiClient: Get.find()));
+  Get.lazyPut(() => ProfileRepo(apiClient: Get.find()));
+  Get.lazyPut(() => PostRepo(apiClient: Get.find()));
+  Get.lazyPut(() => NotificationRepo(apiClient: Get.find()));
 
   // Controller
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
   Get.lazyPut(() => SplashController(repo: Get.find()));
-  Get.lazyPut(()=>AuthController(repo: Get.find()));
-
+  Get.lazyPut(() => AuthController(repo: Get.find()));
+  Get.lazyPut(() => SignUpController());
+  Get.lazyPut(() => CheckInController(repo: Get.find()));
+  Get.lazyPut(() => TrackingController(repo: Get.find()));
+  Get.lazyPut(() => HomeController());
+  Get.lazyPut(() => UserController(repo: Get.find()));
+  Get.lazyPut(() => ProfileController(repo: Get.find()));
+  Get.lazyPut(() => PostController(repo: Get.find()));
+  Get.lazyPut(() => NotificationController(repo: Get.find()));
 
   //Init Notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
