@@ -1,8 +1,9 @@
 import 'package:du_an_1/data/model/response/user.dart';
 import 'package:du_an_1/screens/profile/edit_profile_screen.dart';
 import 'package:du_an_1/screens/profile/widgets/profile_avatar_widget.dart';
-import 'package:du_an_1/screens/profile/widgets/user_parameter_widget.dart';
+
 import 'package:du_an_1/screens/sign_in/sign_in_screen.dart';
+import 'package:du_an_1/screens/users/widgets/user_parameter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
