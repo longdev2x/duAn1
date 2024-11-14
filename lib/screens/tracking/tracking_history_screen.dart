@@ -1,13 +1,15 @@
+import 'package:du_an_1/data/model/response/tracking_entity.dart';
+import 'package:du_an_1/screens/tracking/widgets/tracking_history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:timesheet/controller/tracking_controller.dart';
-import 'package:timesheet/data/model/body/tracking_entity.dart';
-import 'package:timesheet/helper/date_converter.dart';
-import 'package:timesheet/screen/tracking/widgets/tracking_history_item.dart';
-import 'package:timesheet/utils/color_resources.dart';
-import 'package:timesheet/view/app_text.dart';
-import 'package:timesheet/view/app_toast.dart';
+import 'package:du_an_1/controller/tracking_controller.dart';
+
+import 'package:du_an_1/helper/date_converter.dart';
+
+import 'package:du_an_1/utils/color_resources.dart';
+import 'package:du_an_1/view/app_text.dart';
+import 'package:du_an_1/view/app_toast.dart';
 
 class TrackingHistoryScreen extends StatelessWidget {
   const TrackingHistoryScreen({super.key});
