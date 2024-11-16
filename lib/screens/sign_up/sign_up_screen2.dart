@@ -91,7 +91,7 @@ class _SignUpScreen2State extends State<SignUpScreen2> {
                           () => AppTextField(
                             lable: 'password'.tr,
                             controller: _passwordController,
-                            obscureText: _showPass.value,
+                            obscureText: !_showPass.value,
                             onObscureTextTap: () {
                               _showPass.value = !_showPass.value;
                             },

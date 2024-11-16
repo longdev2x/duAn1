@@ -11,7 +11,7 @@ import 'package:du_an_1/view/app_text_field.dart';
 import '../home/home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -62,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           Container(
                             margin: const EdgeInsets.only(top: 20),
                             child: AppTextField(
-                              hintText: 'email'.tr,
+                              hintText: 'username'.tr,
                               controller: _usernameController,
                             ),
                           ),
@@ -71,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: Obx(
                                 () => TextFormField(
                                   textInputAction: TextInputAction.done,
-                                  obscureText: _showPass.value,
+                                  obscureText: !_showPass.value,
                                   controller: _passwordController,
                                   decoration: InputDecoration(
                                       contentPadding:
