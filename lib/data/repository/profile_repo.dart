@@ -17,6 +17,10 @@ class ProfileRepo extends GetxService {
     );
   }
 
+    Future<Response> getCurrentUser() async {
+    return await apiClient.getData(AppConstants.GET_USER);
+  }
+
   Future<Response> updateUserForAdmin(User objUser) async {
     return await apiClient.postData(
       AppConstants.UPDATE_USER_FOR_ADMIN,

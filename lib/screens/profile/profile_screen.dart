@@ -17,9 +17,19 @@ import 'package:du_an_1/view/app_button.dart';
 import 'package:du_an_1/view/app_text.dart';
 import 'package:du_an_1/view/app_toast.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Get.find<ProfileController>().getCurrentUser();
+  }
   void _logout(BuildContext context) async {
     showDialog(
       context: context,
@@ -54,6 +64,10 @@ class ProfileScreen extends StatelessWidget {
           if (controller.user?.roles != null &&
               controller.user!.roles!.isNotEmpty) {
             isAdmin = controller.user!.roles?[0].name == AppConstants.ROLE_ADMIN;
+          }
+
+          if(controller.loading) {
+            return const Center(child: CircularProgressIndicator(),);
           }
 
           User objUser = controller.user!;

@@ -37,6 +37,24 @@ class ProfileController extends GetxController implements GetxService {
     super.onClose();
   }
 
+
+
+  Future<int> getCurrentUser() async {
+    _loading = true;
+    update();
+    Response response = await repo.getCurrentUser();
+    if (response.statusCode == 200) {
+      _user = User.fromJson(response.body);
+      update();
+    } else {
+      ApiChecker.checkApi(response);
+    }
+
+    _loading = false;
+    update();
+    return response.statusCode!;
+  }
+
   Future<int> updateInfo({
     String? username,
     bool? active,

@@ -2,6 +2,7 @@ import 'package:du_an_1/data/model/response/user.dart';
 
 import 'package:du_an_1/screens/users/edit_member_user_screen.dart';
 import 'package:du_an_1/screens/users/widgets/user_parameter_widget.dart';
+import 'package:du_an_1/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,7 @@ class UserDetailScreen extends StatelessWidget {
     bool isAdmin = false;
 
     if (currentUser.roles != null && currentUser.roles!.isNotEmpty) {
-      isAdmin = currentUser.roles?[0].name == 'ROLE_ADMIN';
+      isAdmin = currentUser.roles?[0].name == AppConstants.ROLE_ADMIN;
     }
 
     return Scaffold(
