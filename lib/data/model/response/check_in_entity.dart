@@ -1,5 +1,5 @@
 class CheckInEntity {
-  final int? id;
+  final String? id;
   final String? ip;
   final String? message;
   final bool? offline;
@@ -14,7 +14,7 @@ class CheckInEntity {
         json?['message'],
         json?['offline'],
         json?['dateAttendance'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json!['dateAttendance']).toLocal()
+            ? DateTime.parse(json!['dateAttendance']).toLocal()
             : null,
       );
 }

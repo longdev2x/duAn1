@@ -2,7 +2,7 @@
 import 'package:du_an_1/data/model/response/role.dart';
 
 class User {
-  int? id;
+  String? id;
   String? username;
   bool? active;
   bool? setPassword;
@@ -99,7 +99,7 @@ class User {
       );
 
   factory User.fromJson(Map<String, dynamic>? json) {
-    final roleList = json?['roles'] != null || (json?['roles'] as List).isNotEmpty
+    final roleList =  (json?['roles'] is List && (json?['roles'] as List).isNotEmpty)
         ? (json!['roles'] as List<dynamic>?)
             ?.map((roleJson) => Role.fromJson(roleJson))
             .toList()

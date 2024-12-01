@@ -36,11 +36,9 @@ class AuthController extends GetxController implements GetxService {
     update();
 
     Response response = await repo.signUp(objUser: objUser);
-
     if (response.statusCode != 200) {
       ApiChecker.checkApi(response);
     }
-
     _loading = false;
     update();
     return response.statusCode!;
@@ -54,6 +52,7 @@ class AuthController extends GetxController implements GetxService {
     if (response.statusCode == 200) {
       TokenResponsive tokeBody = TokenResponsive.fromJson(response.body);
       await repo.saveUserToken(tokeBody.accessToken!);
+
       await repo.setDeviceToken();
 
       await getCurrentUser();

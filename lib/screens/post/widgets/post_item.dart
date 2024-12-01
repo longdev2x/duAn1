@@ -33,7 +33,7 @@ class _PostItemState extends State<PostItem> {
     super.dispose();
   }
 
-  bool _checkLiked(int? currentId, List<LikeEntity> likes) {
+  bool _checkLiked(String? currentId, List<LikeEntity> likes) {
     return likes.any((e) => e.user?.id == currentId);
   }
 
@@ -130,14 +130,14 @@ class _PostItemState extends State<PostItem> {
   }
 
   bool _checkIsMe() {
-    int? currentId = Get.find<AuthController>().user.id;
+    String? currentId = Get.find<AuthController>().user.id;
     return currentId == widget.objPost.user?.id;
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    int? currentId = Get.find<AuthController>().user.id;
+    String? currentId = Get.find<AuthController>().user.id;
 
     return GestureDetector(
       onTap: () {

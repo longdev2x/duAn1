@@ -4,7 +4,7 @@ import 'package:du_an_1/data/model/response/post_entity.dart';
 import 'package:du_an_1/data/model/response/user.dart';
 
 class CommentEntity {
-  final int? id;
+  final String? id;
   final String? content;
   final DateTime? date;
   final User? user;

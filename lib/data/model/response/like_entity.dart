@@ -4,7 +4,7 @@ import 'package:du_an_1/data/model/response/user.dart';
 
 class LikeEntity {
   final DateTime? date;
-  final int? id;
+  final String? id;
   final int? type;
   final User? user;
   final PostEntity? objPost;

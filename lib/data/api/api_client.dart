@@ -94,7 +94,7 @@ class ApiClient extends GetxService {
 
   Future<Response> postData(
       String uri, dynamic body, Map<String, String>? headers,
-      {int? id}) async {
+      {String? id}) async {
     String fullUri = appBaseUrl + uri;
     if (id != null) {
       fullUri = fullUri.replaceFirst('{id}', id.toString());
@@ -190,7 +190,7 @@ class ApiClient extends GetxService {
     }
   }
 
-  Future<Response> deleteData(String uri, int? id,
+  Future<Response> deleteData(String uri, String? id,
       {Map<String, String>? headers}) async {
     String fullURL = appBaseUrl + uri;
     if (id != null) {

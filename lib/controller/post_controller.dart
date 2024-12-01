@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer' as developer;
 import 'package:du_an_1/controller/auth_controller.dart';
 import 'package:du_an_1/data/api/api_checker.dart';
 import 'package:du_an_1/data/model/body/request/search_request.dart';
@@ -74,6 +75,7 @@ class PostController extends GetxController implements GetxService {
     update();
 
     Response response = await repo.searchNews(objSearchRequest);
+    developer.log('zzzzzz - ${response.body}');
 
     if (response.statusCode == 200) {
       PostSearchEntity objPostSearch = PostSearchEntity.fromJson(response.body);
@@ -211,7 +213,7 @@ class PostController extends GetxController implements GetxService {
     objPost = objPost.copyWith(content: newContent, media: [
       //Em để test ạ
       MediaEntity(
-        id: 0,
+        id: 'sljfksd',
         contentType: 'application/octet-stream',
         contentSize: 237056,
         name: '2024-10-29 06:24:27.664070.png',

@@ -14,7 +14,7 @@ import 'package:du_an_1/view/app_toast.dart';
 class TrackingHistoryScreen extends StatelessWidget {
   const TrackingHistoryScreen({super.key});
 
-  Future<bool> _onDelete(int? id) async {
+  Future<bool> _onDelete(String? id) async {
     if (id == null) {
       AppToast.showToast('Can\'t delete');
       return false;

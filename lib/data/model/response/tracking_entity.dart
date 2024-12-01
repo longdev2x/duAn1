@@ -2,7 +2,7 @@
 import 'package:du_an_1/data/model/response/user.dart';
 
 class TrackingEntity {
-  int? id;
+  String? id;
   String? content;
   DateTime? date;
   User? user;
@@ -22,10 +22,10 @@ class TrackingEntity {
       );
 
   factory TrackingEntity.fromJson(Map<String, dynamic> json) => TrackingEntity(
-        id: json['id'],
+        id: json['_id'],
         content: json['content'],
         date: json['date'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(json['date']).toUtc()
+            ? DateTime.parse(json['date']).toLocal()
             : null,
         user: User.fromJson(json['user']),
       );
@@ -34,6 +34,8 @@ class TrackingEntity {
         'id': id,
         'content': content,
         'date': date?.toIso8601String(),
-        'user': user?.toJson(),
+        'user': user?.id,
       };
 }
+
+

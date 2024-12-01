@@ -25,13 +25,13 @@ class PostDetailScreen extends StatefulWidget {
 }
 
 class _PostDetailScreenState extends State<PostDetailScreen> {
-  late final int postId;
+  late final String postId;
   final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    postId = Get.arguments['postId'] as int;
+    postId = Get.arguments['postId'] as String;
   }
 
   @override
@@ -44,7 +44,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     Get.find<PostController>().likePost(DateTime.now(), objPost);
   }
 
-  bool _checkLiked(int? currentId, List<LikeEntity> likes) {
+  bool _checkLiked(String? currentId, List<LikeEntity> likes) {
     return likes.any((e) => e.user?.id == currentId);
   }
 
@@ -149,14 +149,14 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   }
 
   bool _checkIsMe(PostEntity objPost) {
-    int? currentId = Get.find<AuthController>().user.id;
+    String? currentId = Get.find<AuthController>().user.id;
     return currentId == objPost.user?.id;
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    int? currentId = Get.find<AuthController>().user.id;
+    String? currentId = Get.find<AuthController>().user.id;
 
     return GetBuilder<PostController>(builder: (controller) {
       PostEntity objPost = controller.posts!.firstWhere(

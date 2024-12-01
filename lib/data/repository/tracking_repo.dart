@@ -29,7 +29,7 @@ class TrackingRepo extends GetxService {
     );
   }
 
-  Future<Response> deleteTracking(int id) async {
+  Future<Response> deleteTracking(String id) async {
     return await apiClient.deleteData(
       AppConstants.DELETE_TRACKING,
       id,

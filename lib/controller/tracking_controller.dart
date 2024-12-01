@@ -95,11 +95,13 @@ class TrackingController extends GetxController implements GetxService {
     return response.statusCode!;
   }
 
-  Future<int> deleteTracking({required int id}) async {
+  Future<int> deleteTracking({required String id}) async {
+    print('zzzz -1 ');
     Response response = await repo.deleteTracking(id);
-
-    if (response.statusCode == 200) {
+print('zzzz -2 ');
+    if (response.statusCode == 200) {print('zzzz -3 ');
       _trackings!.removeWhere((e) => e.id == id);
+      print('zzzz -4 ');
       update();
     } else {
       ApiChecker.checkApi(response);

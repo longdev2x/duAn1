@@ -62,3 +62,75 @@ class NotificationController extends GetxController implements GetxService {
     return response.statusCode!;
   }
 }
+
+
+
+
+// {
+//     "content": [
+//         {
+//             "id": 140,
+//             "content": "hihihiha",
+//             "date": 1731320377000,
+//             "user": {
+//                 "id": 221,
+//                 "displayName": "huy99",
+//                 "username": "huy99",
+//                 "email": "huy@gmail.com",
+//                 "gender": "M", 
+//                 "university": "DH Thai Nguyen",
+//                 "year": 7,
+//                 "roles": [
+//                     {
+//                         "id": 4,
+//                         "name": "ROLE_USER"
+//                     }
+//                 ]
+//             },
+//             "media": [
+//                 {
+//                     "id": 0,
+//                     "contentType": "application/octet-stream",
+//                     "contentSize": 237056,
+//                     "name": "2024-10-29 06:24:27.664070.png",
+//                     "filePath": "src/main/resources/uploads/images/2024-10-29 06:24:27.664070.png"
+//                 }
+//             ],
+//             "likes": [
+//                 {
+//                     "id": 1068,
+//                     "type": 0,
+//                     "date": 1731320733000,
+//                     "user": {
+//                         "id": 221,
+//                         "username": "huy99"
+//                     }
+//                 }
+//             ],
+//             "comments": [
+//                 {
+//                     "id": 166,
+//                     "content": "hehe", 
+//                     "date": 1731320741000,
+//                     "user": {
+//                         "id": 221,
+//                         "username": "huy99"
+//                     }
+//                 }
+//             ]
+//         }
+//     ],
+//     "pageable": {
+//         "pageNumber": 0,
+//         "pageSize": 1,
+//         "sort": {
+//             "sorted": false,
+//             "unsorted": true
+//         }
+//     },
+//     "totalElements": 140,
+//     "totalPages": 140,
+//     "size": 1,
+//     "first": true,
+//     "last": false
+// }

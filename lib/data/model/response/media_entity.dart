@@ -2,7 +2,7 @@
 import 'package:du_an_1/data/model/response/post_entity.dart';
 
 class MediaEntity {
-  final int? id;
+  final String? id;
   final String? contentType;
   final int? contentSize;
   final String? extension;

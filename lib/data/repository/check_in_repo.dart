@@ -20,13 +20,14 @@ class CheckInRepo {
       query: {'ip': ip},
     );
   }
-
+//Get IP công cộng - Không phải ip local
   Future<String?> getIp() async {
     String ip = '';
     final ipResponse =
         await http.get(Uri.parse('https://api.ipify.org?format=json'));
     if (ipResponse.statusCode == 200) {
       ip = jsonDecode(ipResponse.body)['ip'];
+      print('zzz - Ip Public : $ip');
     } else {
       return null;
     }

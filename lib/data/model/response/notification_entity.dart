@@ -2,7 +2,7 @@
 import 'package:du_an_1/data/model/response/user.dart';
 
 class NotificationEntity {
-  final int? id;
+  final String? id;
   final String? title;
   final String? type;
   final String? body;
@@ -19,7 +19,7 @@ class NotificationEntity {
   );
 
   NotificationEntity copyWith({
-    int? id,
+    String? id,
     String? title,
     String? type,
     String? body,

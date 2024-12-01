@@ -5,7 +5,7 @@ import 'package:du_an_1/data/model/response/media_entity.dart';
 import 'package:du_an_1/data/model/response/user.dart';
 
 class PostEntity {
-  final int? id;
+  final String? id;
   final String? content;
   final DateTime? date;
   final List<MediaEntity> media;
