@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:du_an_1/controller/profile_controller.dart';
-
 import 'package:du_an_1/helper/date_converter.dart';
-
 import 'package:du_an_1/utils/color_resources.dart';
-
 import 'package:du_an_1/utils/images.dart';
 import 'package:du_an_1/view/app_button.dart';
 import 'package:du_an_1/view/app_image.dart';
@@ -24,8 +21,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _displayNameController = TextEditingController();
   final TextEditingController _birthPlaceController = TextEditingController();
   final TextEditingController _universityController = TextEditingController();
@@ -37,8 +32,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
     _birthPlaceController.dispose();
     _displayNameController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
     _universityController.dispose();
     _yearController.dispose();
     _dobController.dispose();
@@ -48,8 +41,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     User objUser = Get.find<ProfileController>().user!;
-    _lastNameController.text = objUser.lastName ?? '';
-    _firstNameController.text = objUser.firstName ?? '';
     _displayNameController.text = objUser.displayName ?? '';
     _birthPlaceController.text = objUser.birthPlace ?? '';
     _universityController.text = objUser.university ?? '';
@@ -80,8 +71,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
 
     int statusCode = await Get.find<ProfileController>().updateInfo(
-      firstName: _firstNameController.text.trim(),
-      lastName: _lastNameController.text.trim(),
       displayName: _displayNameController.text.trim(),
       birthPlace: _birthPlaceController.text.trim(),
       university: _universityController.text.trim(),
@@ -193,27 +182,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               child: Column(
                 children: [
                   const ProfileAvatarWidget(),
-                  SizedBox(height: 20.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: AppTextField(
-                          lable: 'last_name'.tr,
-                          controller: _lastNameController,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Expanded(
-                        child: AppTextField(
-                          lable: 'first_name'.tr,
-                          controller: _firstNameController,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 40.h),
                   AppTextField(
                     lable: 'display_name'.tr,
                     controller: _displayNameController,
@@ -262,12 +231,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     lable: 'year_student'.tr,
                     controller: _yearController,
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 40.h),
                   AppButton(
                     name: 'update'.tr,
                     ontap: _onSubmit,
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   GestureDetector(
                     onTap: () {},
                     child: AppText16(

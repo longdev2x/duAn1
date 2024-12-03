@@ -30,7 +30,7 @@ class UserController extends GetxController implements GetxService {
   @override
   void onReady() {
     super.onReady();
-    searchUser(keyWord: null, pageIndex: 1, size: 15, status: null);
+    searchUser(keyWord: null, pageIndex: 0, size: 15, status: null);
   }
 
   @override

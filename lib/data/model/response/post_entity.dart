@@ -50,9 +50,9 @@ class PostEntity {
               .toList()
           : [],
       content: json?['content'],
-      date: json?['date'] != null
-          ? _convertDateFromTimestamp(json!['date'])
-          : null,
+      date: (json?['date'] == null || json?['date'] is int)
+          ? null
+          : DateTime.tryParse(json?['date']),
       likes: json?['likes'] != null
           ? (json?['likes'] as List)
               .map((like) => LikeEntity.fromJson(like))
@@ -63,7 +63,7 @@ class PostEntity {
               .map((e) => MediaEntity.fromJson(e))
               .toList()
           : [],
-      user: json?['user'] != null ? User.fromJson(json?['user']) : null,
+      user: (json?['user'] == null || json?['user'] is String) ? null : User.fromJson(json?['user']),
     );
   }
 

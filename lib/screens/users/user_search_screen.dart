@@ -15,7 +15,7 @@ class UserSearchScreen extends StatelessWidget {
 
   void _search(String value) async {
     int statusCode = await Get.find<UserController>().searchUser(
-        keyWord: value.trim(), pageIndex: 1, size: 100, status: null);
+        keyWord: value.trim(), pageIndex: 0, size: 100, status: null);
     if (statusCode != 200) {
       AppToast.showToast('Lỗi khi tìm kiếm');
     }

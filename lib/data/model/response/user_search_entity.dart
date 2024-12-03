@@ -30,7 +30,7 @@ class UserSearchEntity {
   factory UserSearchEntity.fromJson(Map<String, dynamic>? json) =>
   
       UserSearchEntity(
-        (json?['content'] as List<dynamic>).map((json) {
+        json?['content'] == null ? [] : (json?['content'] as List<dynamic>).map((json) {
           return User.fromJson(json);
         }).toList(),
         json?['empty'],
