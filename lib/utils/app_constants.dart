@@ -20,6 +20,7 @@ class AppConstants {
   static const String SEARCH_USER = '/users/searchByPage';
   static const String UPDATE_INFO = '/users/update-myself/';
   static const String UPDATE_USER_FOR_ADMIN = '/users/update/{id}';
+  static const String BLOC = '/users/bloc/{id}';
   static const String UPLOAD_FILE = '/public/uploadFile';
   static const String GET_FILE = '/public/images/';
   static const String GET_NEWS = '/posts/get-news';

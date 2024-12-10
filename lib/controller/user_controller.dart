@@ -121,7 +121,25 @@ class UserController extends GetxController implements GetxService {
     }
   }
 
+  Future<int> blocUser(User objUser) async {
+    print('zzzzzzz ${objUser.id}');
+    
+    Response response = await repo.blocUser(objUser.id!);
+    if (response.statusCode != 200) {
+      ApiChecker.checkApi(response);
+    } else {
+      for (int i = 0; i < _users!.length; i++) {
+        if (_users![i] == objUser) {
+          _users!.remove(objUser);
+        }
+      }
+    }
+    
 
+    update();
+
+    return response.statusCode!;
+  }
 
   Future<int> updateUserForAdmin(
     User objUser, {
@@ -148,29 +166,35 @@ class UserController extends GetxController implements GetxService {
     List<Role>? roles,
   }) async {
     User oldUser = objUser;
-    objUser = objUser.copyWith(
-      active: active,
-      changePass: changePass,
-      setPassword: setPassword,
-      hasPhoto: hasPhoto,
-      tokenDevice: tokenDevice,
-      birthPlace: birthPlace,
-      confirmPassword: confirmPassword,
-      countDayCheckin: countDayCheckin,
-      countDayTracking: countDayTracking,
-      displayName: displayName,
-      dob: dob,
-      email: email,
-      firstName: firstName,
-      gender: gender,
-      image: image,
-      lastName: lastName,
-      password: password,
-      roles: roles,
-      university: university,
-      username: username,
-      year: year,
-    );
+    for (int i = 0; i < _users!.length; i++) {
+      if (_users![i] == objUser) {
+        _users![i] = _users![i].copyWith(
+          active: active,
+          changePass: changePass,
+          setPassword: setPassword,
+          hasPhoto: hasPhoto,
+          tokenDevice: tokenDevice,
+          birthPlace: birthPlace,
+          confirmPassword: confirmPassword,
+          countDayCheckin: countDayCheckin,
+          countDayTracking: countDayTracking,
+          displayName: displayName,
+          dob: dob,
+          email: email,
+          firstName: firstName,
+          gender: gender,
+          image: image,
+          lastName: lastName,
+          password: password,
+          roles: roles,
+          university: university,
+          username: username,
+          year: year,
+        );
+        objUser = _users![i];
+      }
+    }
+
     update();
 
     Response response = await repoProfile.updateUserForAdmin(objUser);

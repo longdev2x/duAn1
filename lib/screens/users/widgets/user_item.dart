@@ -26,15 +26,14 @@ class UserItem extends StatelessWidget {
       isAdmin = currentUser.roles?[0].name == 'ROLE_ADMIN';
     }
 
-    void blockUser(User objUser, BuildContext context) {
+    void blockUser(User objUser, BuildContext context)  {
       showDialog(
         context: context,
         builder: (context) => AppConfirm(
           title: 'Bạn thực sự muốn block ${objUser.displayName}',
-          onConfirm: () {
-            // User không lưu thông tin block
-            // Get.find<AuthController>()
-            AppToast.showToast('Không có thông tin block để triển khai');
+          onConfirm: () async {
+            // User không lưu thông 
+             await Get.find<UserController>().blocUser(objUser);
             Navigator.pop(context);
           },
         ),

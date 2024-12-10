@@ -16,6 +16,15 @@ class UserSearchRepo extends GetxService{
     );
   }
 
+  Future<Response> blocUser(String id) async {
+    return await apiClient.postData(
+      AppConstants.BLOC,
+      {},
+      null,
+      id : id,
+    );
+  }
+
     Future<Response> getImage(String nameFile) async {
     return await apiClient.getImageData(AppConstants.GET_FILE,
         nameFile: nameFile,);

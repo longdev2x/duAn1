@@ -24,11 +24,10 @@ class UserDetailScreen extends StatelessWidget {
       context: context,
       builder: (context) => AppConfirm(
         title: 'Bạn thực sự muốn block ${objUser.displayName}',
-        onConfirm: () {
-          // User không lưu thông tin block
-          // Get.find<AuthController>()
-          AppToast.showToast('Không có thông tin block để triển khai');
-          Navigator.pop(context);
+        onConfirm: () async {
+            Navigator.pop(context);
+            Navigator.pop(context);
+            await Get.find<UserController>().blocUser(objUser);
         },
       ),
     );
@@ -141,14 +140,14 @@ class UserDetailScreen extends StatelessWidget {
                 icon: Images.icSocial,
                 prameter: user.year.toString(),
               ),
-            UserParameterWidget(
+            if(isAdmin) UserParameterWidget(
               name: 'count_day_check_in'.tr,
               icon: Images.icSocial,
               prameter: user.countDayCheckin != null
                   ? user.countDayCheckin.toString()
                   : '0',
             ),
-            UserParameterWidget(
+           if(isAdmin) UserParameterWidget(
               name: 'count_day_tracking'.tr,
               icon: Images.icSocial,
               prameter: user.countDayTracking != null

@@ -61,7 +61,7 @@ class _UserListWidgetState extends State<UserListWidget> {
                       ? const Center(child: CircularProgressIndicator())
                       : const SizedBox.shrink();
                 } else {
-                  return UserItem(objUser: controller.users![index], onBack: () =>  Get.find<UserController>().refreshData(),);
+                  return UserItem(objUser: controller.users![index], onBack: () {},);
                 }
               });
         } else {
