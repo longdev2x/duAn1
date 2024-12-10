@@ -51,7 +51,7 @@ class PostEntity {
           : [],
       content: json?['content'],
       date: (json?['date'] == null || json?['date'] is int)
-          ? null
+          ? DateTime.now()
           : DateTime.tryParse(json?['date']),
       likes: json?['likes'] != null
           ? (json?['likes'] as List)
