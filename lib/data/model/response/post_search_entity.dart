@@ -53,6 +53,7 @@ class PageableEntity {
   final int? pageSize;
   final bool? paged;
   final bool? unpaged;
+  final int? totalElements;
   final SortEntity? objSort;
 
   const PageableEntity(
@@ -62,6 +63,7 @@ class PageableEntity {
     this.paged,
     this.unpaged,
     this.objSort,
+    this.totalElements,
   );
 
   factory PageableEntity.fromJson(Map<String, dynamic>? json) => PageableEntity(
@@ -71,6 +73,7 @@ class PageableEntity {
         json?['paged'],
         json?['unpaged'],
         SortEntity.fromJson(json?['objSort']),
+        json?['totalElements'],
       );
 }
 

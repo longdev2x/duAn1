@@ -43,7 +43,7 @@ class PostEntity {
 
   factory PostEntity.fromJson(Map<String, dynamic>? json) {
     return PostEntity(
-      id: json?['id'],
+      id: json?['_id'],
       comments: json?['comments'] != null
           ? (json!['comments'] as List)
               .map((comment) => CommentEntity.fromJson(comment))

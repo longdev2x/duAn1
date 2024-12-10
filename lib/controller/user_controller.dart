@@ -1,15 +1,18 @@
 import 'dart:io';
 import 'package:du_an_1/data/api/api_checker.dart';
 import 'package:du_an_1/data/model/body/request/search_request.dart';
+import 'package:du_an_1/data/model/response/role.dart';
 import 'package:du_an_1/data/model/response/user.dart';
 import 'package:du_an_1/data/model/response/user_search_entity.dart';
+import 'package:du_an_1/data/repository/profile_repo.dart';
 import 'package:du_an_1/data/repository/user_search_repo.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
 class UserController extends GetxController implements GetxService {
   final UserSearchRepo repo;
-  UserController({required this.repo});
+  final ProfileRepo repoProfile;
+  UserController({required this.repo, required this.repoProfile});
 
   List<User>? _users;
   List<User> _userSearchs = [];
@@ -116,5 +119,68 @@ class UserController extends GetxController implements GetxService {
     } else {
       ApiChecker.checkApi(response);
     }
+  }
+
+
+
+  Future<int> updateUserForAdmin(
+    User objUser, {
+    String? username,
+    bool? active,
+    bool? changePass,
+    bool? hasPhoto,
+    bool? setPassword,
+    String? birthPlace,
+    String? tokenDevice,
+    String? confirmPassword,
+    String? displayName,
+    DateTime? dob,
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? gender,
+    String? image,
+    String? university,
+    String? password,
+    int? countDayCheckin,
+    int? countDayTracking,
+    int? year,
+    List<Role>? roles,
+  }) async {
+    User oldUser = objUser;
+    objUser = objUser.copyWith(
+      active: active,
+      changePass: changePass,
+      setPassword: setPassword,
+      hasPhoto: hasPhoto,
+      tokenDevice: tokenDevice,
+      birthPlace: birthPlace,
+      confirmPassword: confirmPassword,
+      countDayCheckin: countDayCheckin,
+      countDayTracking: countDayTracking,
+      displayName: displayName,
+      dob: dob,
+      email: email,
+      firstName: firstName,
+      gender: gender,
+      image: image,
+      lastName: lastName,
+      password: password,
+      roles: roles,
+      university: university,
+      username: username,
+      year: year,
+    );
+    update();
+
+    Response response = await repoProfile.updateUserForAdmin(objUser);
+    if (response.statusCode != 200) {
+      ApiChecker.checkApi(response);
+      objUser = oldUser;
+    }
+
+    update();
+
+    return response.statusCode!;
   }
 }

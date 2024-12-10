@@ -21,10 +21,12 @@ class CommentEntity {
   factory CommentEntity.fromJson(Map<String, dynamic>? json) {
     return CommentEntity(
       content: json?['content'],
-      date: json?['date'] != null ? DateTime.fromMillisecondsSinceEpoch(json?['date']).toLocal() : null,
+      date: (json?['date'] == null || json?['date'] is int)
+          ? null
+          : DateTime.tryParse(json?['date']),
       id: json?['id'],
       user: User.fromJson(json?['user']),
-      objPost: PostEntity.fromJson(json?['post']),
+      objPost: json?['post'] is String ? null : PostEntity.fromJson(json?['post']),
     );
   }
 
@@ -33,9 +35,7 @@ class CommentEntity {
       'content': content,
       'date': date?.toIso8601String(),
       'id': id,
-      'user': user?.toJson(),
-      //Lặp vô tận
-      "post": null,
+      'user': user?.id,
     };
   }
 }

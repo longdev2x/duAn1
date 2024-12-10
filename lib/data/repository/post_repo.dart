@@ -46,12 +46,12 @@ class PostRepo extends GetxService {
     );
   }
 
-  Future<Response> likePost(LikeEntity objLike) async {
+  Future<Response> likePost(LikeEntity objLike, String postId) async {
     return await apiClient.postData(
       AppConstants.LIKE_POST,
       objLike.toJson(),
       null,
-      id: objLike.objPost?.id,
+      id: postId,
     );
   }
 

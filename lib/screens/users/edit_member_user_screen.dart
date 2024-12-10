@@ -1,3 +1,4 @@
+import 'package:du_an_1/controller/user_controller.dart';
 import 'package:du_an_1/data/model/response/user.dart';
 import 'package:du_an_1/screens/profile/widgets/profile_avatar_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:du_an_1/view/app_image.dart';
 import 'package:du_an_1/view/app_text.dart';
 import 'package:du_an_1/view/app_text_field.dart';
 import 'package:du_an_1/view/app_toast.dart';
-
 
 class EditMemberUserScreen extends StatefulWidget {
   final User objUser;
@@ -30,6 +30,7 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
   final TextEditingController _universityController = TextEditingController();
   final TextEditingController _yearController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
+  late User objUser;
 
   @override
   void dispose() {
@@ -46,39 +47,43 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
   @override
   void initState() {
     super.initState();
-    _lastNameController.text = widget.objUser.lastName ?? '';
-    _firstNameController.text = widget.objUser.firstName ?? '';
-    _displayNameController.text = widget.objUser.displayName ?? '';
-    _birthPlaceController.text = widget.objUser.birthPlace ?? '';
-    _universityController.text = widget.objUser.university ?? '';
+    objUser = widget.objUser;
+    _lastNameController.text = objUser.lastName ?? '';
+    _firstNameController.text = objUser.firstName ?? '';
+    _displayNameController.text = objUser.displayName ?? '';
+    _birthPlaceController.text = objUser.birthPlace ?? '';
+    _universityController.text = objUser.university ?? '';
     _dobController.text = DateConverter.getOnlyFomatDate(
-        widget.objUser.dob ?? DateTime.now().subtract(const Duration(days: 7200)));
-    _yearController.text = widget.objUser.year != null ? widget.objUser.year.toString() : '';
+        objUser.dob ?? DateTime.now().subtract(const Duration(days: 7200)));
+    _yearController.text = objUser.year != null ? objUser.year.toString() : '';
   }
 
   void _onGenderPick(String gender) {
-    Get.find<ProfileController>().updateUserForAdmin(widget.objUser, gender: gender);
+    Get.find<UserController>().updateUserForAdmin(objUser, gender: gender);
+    setState(() {
+      objUser = objUser.copyWith(gender: gender);
+    });
   }
 
-  void _onSubmit() {
+  void _onSubmit() async {
     int? year;
     if (_displayNameController.text.trim().length < 5) {
       AppToast.showToast('${'display_name'.tr} ${'must_be_greater'.trParams({
-        'number' : '4'
-      })}');
+            'number': '4'
+          })}');
       return;
     }
     year = int.tryParse(_yearController.text);
     if (year == null || year < 1 || year > 7) {
       AppToast.showToast('${'year_student'} ${'must_be_between'.trParams({
-        'number1' : '1',
-        'number2' : '7'
-      })}');
+            'number1': '1',
+            'number2': '7'
+          })}');
       return;
     }
 
-    Get.find<ProfileController>().updateUserForAdmin(
-      widget.objUser,
+    int statusCode = await Get.find<UserController>().updateUserForAdmin(
+      objUser,
       firstName: _firstNameController.text.trim(),
       lastName: _lastNameController.text.trim(),
       displayName: _displayNameController.text.trim(),
@@ -86,6 +91,12 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
       university: _universityController.text.trim(),
       year: year,
     );
+    if (statusCode == 200) {
+      AppToast.showToast('Cập nhật thành công');
+      Get.back();
+    } else {
+      AppToast.showToast('Cập nhật thất bại');
+    }
   }
 
   void _onDatePicker() async {
@@ -94,7 +105,7 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
         firstDate: DateTime.now().subtract(const Duration(days: 100000)),
         lastDate: DateTime.now(),
         initialDate: DateTime.now().subtract(const Duration(days: 7200)));
-    Get.find<ProfileController>().updateUserForAdmin(widget.objUser, dob: date);
+    Get.find<UserController>().updateUserForAdmin(objUser, dob: date);
   }
 
   @override
@@ -161,7 +172,7 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
                           },
                           iconPath: Images.icGenderMan,
                           text: 'male'.tr,
-                          isChose: widget.objUser.gender == 'M'),
+                          isChose: objUser.gender == 'M'),
                       SizedBox(width: 10.w),
                       _genderPicker(
                           onTap: () {
@@ -169,7 +180,7 @@ class _EditMemberUserScreenState extends State<EditMemberUserScreen> {
                           },
                           iconPath: Images.icGenderWoman,
                           text: 'female'.tr,
-                          isChose: widget.objUser.gender == 'F'),
+                          isChose: objUser.gender == 'F'),
                     ],
                   ),
                   SizedBox(height: 10.h),

@@ -60,7 +60,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => CheckInController(repo: Get.find()));
   Get.lazyPut(() => TrackingController(repo: Get.find()));
   Get.lazyPut(() => HomeController());
-  Get.lazyPut(() => UserController(repo: Get.find()));
+  Get.lazyPut(() => UserController(repo: Get.find(), repoProfile: Get.find()));
   Get.lazyPut(() => ProfileController(repo: Get.find()));
   Get.lazyPut(() => PostController(repo: Get.find()));
   Get.lazyPut(() => NotificationController(repo: Get.find()));

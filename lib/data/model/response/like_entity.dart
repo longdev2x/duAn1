@@ -20,10 +20,12 @@ class LikeEntity {
   factory LikeEntity.fromJson(Map<String, dynamic>? json) {
     return LikeEntity(
       id: json?['id'],
-      date: json?['date'] != null ? DateTime.fromMillisecondsSinceEpoch(json?['date']).toLocal() : null,
+      date: (json?['date'] == null || json?['date'] is int)
+          ? null
+          : DateTime.tryParse(json?['date']),
       type: json?['type'],
-      user: User.fromJson(json?['user']),
-      objPost: PostEntity.fromJson(json?['post']),
+      user: User.fromJson(json?['user']), //id
+      objPost: json?['post'] is String ? null : PostEntity.fromJson(json?['post']),
     );
   }
 
@@ -32,8 +34,7 @@ class LikeEntity {
       'date': date?.toIso8601String(),
       'id': id,
       'type': type,
-      'user': user?.toJson(),
-      //vòng lặp vô tận
+      'user': user?.id, //sever nhận id
       "post": null,
     };
   }

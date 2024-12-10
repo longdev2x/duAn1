@@ -14,7 +14,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 class PostController extends GetxController implements GetxService {
   final PostRepo repo;
   PostController({required this.repo});
@@ -79,7 +78,12 @@ class PostController extends GetxController implements GetxService {
 
     if (response.statusCode == 200) {
       PostSearchEntity objPostSearch = PostSearchEntity.fromJson(response.body);
+      if (objPostSearch.objPageable?.totalElements != null && _posts != null) {
+        _hasMoreData =
+            _posts!.length < objPostSearch.objPageable!.totalElements!;
+      }
       List<PostEntity> newPosts = objPostSearch.posts;
+      print('zzzzz post length load more ${newPosts.length}');
 
       //Get avatar
       for (PostEntity objPost in newPosts) {
@@ -164,7 +168,7 @@ class PostController extends GetxController implements GetxService {
       objPost.likes.add(LikeEntity(date: date, user: _user));
       update();
 
-      Response response = await repo.likePost(likeEntity);
+      Response response = await repo.likePost(likeEntity, objPost.id!);
 
       if (response.statusCode != 200) {
         ApiChecker.checkApi(response);
@@ -210,20 +214,7 @@ class PostController extends GetxController implements GetxService {
     PostEntity objPost,
     String newContent,
   ) async {
-    objPost = objPost.copyWith(content: newContent, media: [
-      //Em để test ạ
-      MediaEntity(
-        id: 'sljfksd',
-        contentType: 'application/octet-stream',
-        contentSize: 237056,
-        name: '2024-10-29 06:24:27.664070.png',
-        extension: null,
-        filePath:
-            'src/main/resources/uploads/images/2024-10-29 06:24:27.664070.png',
-        isVideo: null,
-        objPost: null,
-      ),
-    ]);
+    objPost = objPost.copyWith(content: newContent);
 
     Response response = await repo.editPost(objPost);
 
@@ -231,6 +222,9 @@ class PostController extends GetxController implements GetxService {
       objPost = PostEntity.fromJson(response.body['data']);
 
       final index = _posts!.indexWhere((e) => e.id == objPost.id);
+      objPost = posts![index].copyWith(
+        content: objPost.content,
+      );
       posts![index] = objPost;
     } else {
       ApiChecker.checkApi(response);

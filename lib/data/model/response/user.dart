@@ -101,12 +101,12 @@ class User {
   factory User.fromJson(Map<String, dynamic>? json) {
     final roleList =  (json?['roles'] is List && (json?['roles'] as List).isNotEmpty)
         ? (json!['roles'] as List<dynamic>?)
-            ?.map((roleJson) => Role.fromJson(roleJson))
+            ?.map((roleJson) => roleJson is String ? Role(null, 'ROLE_USER', 'ROLE_USER') : Role.fromJson(roleJson))
             .toList()
         : [Role(null, 'ROLE_USER', 'ROLE_USER')];
 
     return User(
-      id: json?['id'],
+      id: json?['id'] ?? json?['_id'],
       username: json?['username'],
       active: json?['active'],
       changePass: json?['changePass'],

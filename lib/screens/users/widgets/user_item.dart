@@ -1,12 +1,11 @@
 import 'package:du_an_1/data/model/response/user.dart';
-import 'package:du_an_1/screens/profile/edit_profile_screen.dart';
+import 'package:du_an_1/screens/users/edit_member_user_screen.dart';
 import 'package:du_an_1/screens/users/user_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:du_an_1/controller/auth_controller.dart';
 import 'package:du_an_1/controller/user_controller.dart';
-
 
 import 'package:du_an_1/utils/images.dart';
 import 'package:du_an_1/view/app_image.dart';
@@ -15,7 +14,8 @@ import 'package:du_an_1/view/app_toast.dart';
 
 class UserItem extends StatelessWidget {
   final User objUser;
-  const UserItem({super.key, required this.objUser});
+  final VoidCallback? onBack;
+  const UserItem({super.key, required this.objUser, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,10 @@ class UserItem extends StatelessWidget {
                     AppImageAsset(
                       imagePath: Images.icUpdateUser,
                       onTap: () {
-                        Get.to(() => const EditProfileScreen());
+                        Get.to(() => EditMemberUserScreen(
+                                  objUser: objUser,
+                                ))
+                            ?.then((v) => onBack);
                       },
                       height: 22,
                       width: 22,

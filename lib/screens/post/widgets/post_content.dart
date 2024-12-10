@@ -34,7 +34,7 @@ class _PostContentState extends State<PostContent> {
         return ListView.separated(
           itemBuilder: (context, index) {
             if (index == posts.length) {
-              return const Center(child: CircularProgressIndicator());
+              return controller.hasMoreData ? const Center(child: CircularProgressIndicator()) : const SizedBox.shrink();
             }
             return PostItem(
               objPost: posts[index],

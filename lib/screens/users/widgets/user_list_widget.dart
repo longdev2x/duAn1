@@ -57,11 +57,11 @@ class _UserListWidgetState extends State<UserListWidget> {
               controller: scrollController,
               itemBuilder: (ctx, index) {
                 if (index == controller.users!.length) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return controller.hasMoreData
+                      ? const Center(child: CircularProgressIndicator())
+                      : const SizedBox.shrink();
                 } else {
-                  return UserItem(objUser: controller.users![index]);
+                  return UserItem(objUser: controller.users![index], onBack: () =>  Get.find<UserController>().refreshData(),);
                 }
               });
         } else {
